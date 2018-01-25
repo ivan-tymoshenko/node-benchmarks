@@ -18,7 +18,7 @@ const twiceLongFunction = () => {
   return a;
 };
 
-speed('Speed test', 100000, [
+speed('Speed test', 10000, [
   baseFunction,
   twiceLongFunction
 ]);

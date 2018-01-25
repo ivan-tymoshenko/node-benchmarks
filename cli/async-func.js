@@ -10,7 +10,7 @@ const twiceLongFunction = callback => {
   setTimeout(callback, 2000);
 };
 
-speed('Speed test', 10000, [], [
+speed('Speed test', 1000, [], [
   baseFunction,
   twiceLongFunction
 ]);

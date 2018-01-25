@@ -3,11 +3,11 @@
 const speed = require('../lib/speed');
 
 const baseFunctionAsync = callback => {
-  setTimeout(callback, 1000);
+  setTimeout(callback, 100);
 };
 
 const twiceLongFunctionAsync = callback => {
-  setTimeout(callback, 2000);
+  setTimeout(callback, 200);
 };
 
 const baseFunctionSync = () => {
