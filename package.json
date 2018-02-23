@@ -1,0 +1,31 @@
+{
+  "name": "mhpt",
+  "version": "0.0.1",
+  "author": "Timoshenko Ivan <kerckh@gmail.com>",
+  "description": "",
+  "main": "./mhpt.js",
+  "scripts": {
+    "test": "npm run lint && node ./test/test-sync && node ./test/test-async",
+    "lint": "eslint ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bugagashenkj/mhpt"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bugagashenkj/mhpt/issues"
+  },
+  "homepage": "https://github.com/bugagashenkj/mhpt#readme",
+  "engines": {
+    "node": ">=6.5.0"
+  },
+  "dependencies": {
+    "metarhia-common": "^0.0.24",
+    "metasync": "^0.3.19",
+    "npm": "^5.6.0"
+  },
+  "devDependencies": {
+    "eslint": "^4.16.0"
+  }
+}
