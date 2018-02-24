@@ -1,10 +1,11 @@
 'use strict';
 
 const fs = require('fs');
+const path = require('path');
 const { fork, execSync } = require('child_process');
 const makeResults = require('./lib/make-results.js');
-const PATH_TO_GET_TIME = __dirname + '/lib/get-time.js';
-const PATH_TO_GET_NODE_PATH = __dirname + '/lib/get-node-path.sh';
+const PATH_TO_GET_TIME = path.join(__dirname, '/lib/get-time.js');
+const PATH_TO_GET_NODE_PATH = path.join(__dirname, '/lib/get-node-path.sh');
 
 const DEFAULT_COUNT = 10000;
 
