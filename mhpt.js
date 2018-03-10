@@ -3,11 +3,16 @@
 const fs = require('fs');
 const path = require('path');
 const { fork, execSync } = require('child_process');
-const makeResults = require('./lib/make-results.js');
+const makeResults = require('./lib/create-results.js');
 const PATH_TO_GET_TIME = path.join(__dirname, '/lib/get-time.js');
 const PATH_TO_GET_NODE_PATH = path.join(__dirname, '/lib/get-node-path.sh');
 
-const DEFAULT_COUNT = 10000;
+const defaultParameters = {
+  count: 25000,
+  versions: [process.versions.node],
+  MAX_ANOMALY_PERCENT: 5,
+  NUMBER_OF_STEPS: 25
+};
 
 const getNodePath = (
   // Function which gets path to node by version
@@ -15,14 +20,13 @@ const getNodePath = (
   // Returns: String, path to node
 ) => {
   let pathToNode = null;
+  const command = ['sh', PATH_TO_GET_NODE_PATH, version].join(' ');
   if (process.env.NVM_DIR) {
-    pathToNode = execSync(['sh', PATH_TO_GET_NODE_PATH, version, 'nvm']
-      .join(' ')).toString().trim();
+    pathToNode = execSync(command + ' nvm').toString().trim();
     if (fs.existsSync(pathToNode)) return pathToNode;
   }
   if (process.env.NVS_HOME) {
-    pathToNode = execSync(['sh', PATH_TO_GET_NODE_PATH, version, 'nvs']
-      .join(' ')).toString().trim();
+    pathToNode = execSync(command + ' nvs').toString().trim();
     if (fs.existsSync(pathToNode)) return pathToNode;
   }
   throw new Error('Node: ' + version + ' not found');
@@ -50,18 +54,15 @@ const prepareRequests = (
     const versionResults = []; // results of all functions in one node version
     const nodePath = getNodePath(version);
     const fullVersion = getFullVersion(nodePath);
-    testsSync.forEach(func => {
-      requests.push([func, 'sync', fullVersion, versionResults, nodePath]);
-    });
-    testsAsync.forEach(func => {
-      requests.push([func, 'async', fullVersion, versionResults, nodePath]);
-    });
+    const request = [fullVersion, versionResults, nodePath];
+    testsSync.forEach(func => requests.push([func, 'sync'].concat(request)));
+    testsAsync.forEach(func => requests.push([func, 'async'].concat(request)));
   });
   return requests;
 };
 
 const getPathFromStack = (
-  // Function which returns needed path from stack
+  // Function which returns path from stack
   // Returns: String, path to file
 ) => {
   const LENGTH_OF_STACK = 3;
@@ -74,7 +75,7 @@ const speed = (
   // Function which manages the process of testing functions
   caption, // String, caption of test
   testFunctions, // Array, sync functions and array of async functions
-  parameters = {} // Object, parametrs (count, versions, MAX_ANOMALY_PERCENT)
+  parameters = {} // Object, parameters (count, versions, MAX_ANOMALY_PERCENT)
 ) => {
   const syncFunctions = []; // Array of synchronous functions
   const asyncFunctions = []; // Array of asynchronous functions, callback-last
@@ -91,15 +92,22 @@ const speed = (
     return;
   }
   const path = getPathFromStack();
-  const count = parameters.count || DEFAULT_COUNT;
-  const MAX_ANOMALY_PERCENT = parameters.MAX_ANOMALY_PERCENT || 5;
-  const versions = parameters.versions || [process.versions.node];
+
+  for (const parameter in defaultParameters) {
+    const paramValue = parameters[parameter];
+    const defaultValue = defaultParameters[parameter];
+    parameters[parameter] = paramValue ? paramValue : defaultValue;
+  }
 
   const results = new Map();
   // results of all functions on every requested node version
 
-  const requests = prepareRequests(versions, syncFunctions, asyncFunctions);
   const numberOfFuncs = syncFunctions.length + asyncFunctions.length;
+  const requests = prepareRequests(
+    parameters.versions,
+    syncFunctions,
+    asyncFunctions
+  );
 
   const sendRequest = (
     func, // Function, tested function
@@ -109,15 +117,18 @@ const speed = (
     nodePath // String, path to the needed version of the node
   ) => {
     const forked = fork(PATH_TO_GET_TIME, { execPath: nodePath });
+    const count = parameters.count;
     forked.send({
       name: func.name, count, type, path,
-      percent: MAX_ANOMALY_PERCENT });
+      MAX_ANOMALY_PERCENT: parameters.MAX_ANOMALY_PERCENT,
+      NUMBER_OF_STEPS: parameters.NUMBER_OF_STEPS
+    });
     forked.on('message', result => {
       versionResults.push(result);
       if (versionResults.length === numberOfFuncs) {
         results.set(version, versionResults);
-        if (results.size === versions.length) {
-          makeResults(results, caption, count);
+        if (results.size === parameters.versions.length) {
+          makeResults(results, caption, count, parameters.NUMBER_OF_STEPS);
         }
       }
       if (requests.length) sendRequest(...requests.pop());
