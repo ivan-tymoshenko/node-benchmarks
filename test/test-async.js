@@ -16,5 +16,5 @@ mhpt.speed('Speed test', [[
 ]], {
   count: 1000,
   MAX_ANOMALY_PERCENT: 1,
-  versions: ['9']
+  NODE_VERSIONS: ['9']
 });

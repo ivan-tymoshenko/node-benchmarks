@@ -10,10 +10,11 @@ const paths = {
   GET_NODE_PATH: path.join(__dirname, '/lib/get-node-path.sh')
 };
 
-const defaultParameters = {
+const defaultOptions = {
   COUNT: 25000,
   NODE_VERSIONS: [process.versions.node],
-  MAX_ANOMALY_PERCENT: 5
+  MAX_ANOMALY_PERCENT: 5,
+  START_COUNT: 1000
 };
 
 
@@ -78,7 +79,7 @@ const speed = (
   // Function which manages the process of testing functions
   caption, // String, caption of test
   testFunctions, // Array, sync functions and array of async functions
-  parameters = {} // Object, parameters (count, versions, MAX_ANOMALY_PERCENT)
+  config = {} // Object, config (count, versions, MAX_ANOMALY_PERCENT)
 ) => {
   const syncFunctions = []; // Array of synchronous functions
   const asyncFunctions = []; // Array of asynchronous functions, callback-last
@@ -96,10 +97,10 @@ const speed = (
   }
   const path = getPathFromStack();
 
-  for (const parameter in defaultParameters) {
-    const paramValue = parameters[parameter];
-    const defaultValue = defaultParameters[parameter];
-    parameters[parameter] = paramValue ? paramValue : defaultValue;
+  for (const parameter in defaultOptions) {
+    const paramValue = config[parameter];
+    const defaultValue = defaultOptions[parameter];
+    config[parameter] = paramValue ? paramValue : defaultValue;
   }
 
   const results = new Map();
@@ -107,7 +108,7 @@ const speed = (
 
   const numberOfFuncs = syncFunctions.length + asyncFunctions.length;
   const requests = prepareRequests(
-    parameters.versions,
+    config.NODE_VERSIONS,
     syncFunctions,
     asyncFunctions
   );
@@ -117,27 +118,27 @@ const speed = (
     type, // String, 'sync' or 'async'
     version, // String, version of node
     versionResults, // Array, results of all functions in one node version
-    nodePath // String, path to the needed version of the node
+    NODE_PATH // String, path to the needed version of the node
   ) => {
-    const forked = fork(paths.GET_TIME, { execPath: nodePath });
-    const count = parameters.count;
+    const forked = fork(paths.GET_TIME, {
+      execPath: NODE_PATH,
+      execArgv: ['--expose-gc']
+    });
+    const count = config.count;
     forked.send({
-      name: func.name, count, type, path,
-      percent: parameters.MAX_ANOMALY_PERCENT
+      name: func.name, percent: config.MAX_ANOMALY_PERCENT,
+      START_COUNT: config.START_COUNT, type, path, count
     });
     forked.on('message', result => {
       versionResults.push(result);
       if (versionResults.length === numberOfFuncs) {
         results.set(version, versionResults);
-        if (results.size === parameters.versions.length) {
+        if (results.size === config.NODE_VERSIONS.length) {
           makeResults(results, caption, count);
-
         }
       }
-      if (requests.length) sendRequest(...requests.pop());
     });
   };
-
-  sendRequest(...requests.pop());
+  requests.forEach(request => sendRequest(...request));
 };
 module.exports = { speed };

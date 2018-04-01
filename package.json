@@ -5,6 +5,7 @@
   "description": "",
   "main": "./mhpt.js",
   "scripts": {
+    "test": "node ./test/test-sync.js && node ./test/test-async.js",
     "lint": "eslint ."
   },
   "repository": {

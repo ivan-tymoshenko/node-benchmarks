@@ -101,5 +101,6 @@ mhtp.speed('Benchmark example', [
 ], {
   count: 2000000,
   MAX_ANOMALY_PERCENT: 5,
-  versions: ['9.8']
+  NODE_VERSIONS: ['9.10'],
+  START_COUNT: 100000
 });
