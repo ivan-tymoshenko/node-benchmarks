@@ -5,11 +5,7 @@
   "description": "",
   "main": "./mhpt.js",
   "scripts": {
-    "test": "react-scripts test --env=jsdom",
-    "lint": "eslint .",
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "eject": "react-scripts eject"
+    "lint": "eslint ."
   },
   "repository": {
     "type": "git",
@@ -24,12 +20,7 @@
     "node": ">=6.5.0"
   },
   "dependencies": {
-    "metarhia-common": "^0.0.24",
-    "metasync": "^0.3.19",
-    "npm": "^5.6.0",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0",
-    "react-scripts": "1.1.1"
+    "npm": "^5.6.0"
   },
   "devDependencies": {
     "eslint": "^4.16.0"
