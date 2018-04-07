@@ -99,8 +99,6 @@ mhtp.speed('Benchmark example', [
   objectCreate,
   callFactory
 ], {
-  count: 2000000,
   MAX_ANOMALY_PERCENT: 5,
-  NODE_VERSIONS: ['9.10'],
   START_COUNT: 100000
 });
