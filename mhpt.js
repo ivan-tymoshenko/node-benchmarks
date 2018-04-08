@@ -7,20 +7,20 @@ const makeResults = require('./lib/create-results.js');
 const PATH_TO_GET_TIME = path.join(__dirname, '/lib/get-time.js');
 
 const defaultOptions = {
-  anomaly: 5,
-  count: 25000,
-  startCount: 1000
+  count: 25000, // number of test iterations
+  startCount: 1000, // number of first optimizing iterations
+  anomalyPercent: 5 // maximum possible percent of anomalies
 };
 
 const prepareRequests = (
-  // Function which prepares requests to child processes
+  // Function that prepares requests to child processes
   syncFunctions, // Array of synchronous functions
   asyncFunctions // Array of asynchronous functions, callback-last
   // Returns: Array, array of requests
 ) => {
   const requests = [];
-  syncFunctions.forEach(func => requests.push([func.name, 'sync']));
-  asyncFunctions.forEach(func => requests.push([func.name, 'async']));
+  syncFunctions.forEach(fn => requests.push([fn.name, 'sync']));
+  asyncFunctions.forEach(fn => requests.push([fn.name, 'async']));
   return requests;
 };
 
@@ -30,21 +30,21 @@ const exportsFunctions = (
   asyncFunctions // Array of asynchronous functions, callback-last
 ) => {
   const childProcessExports = module.parent.exports;
-  syncFunctions.forEach(func => { childProcessExports[func.name] = func; });
-  asyncFunctions.forEach(func => { childProcessExports[func.name] = func; });
+  syncFunctions.forEach(fn => { childProcessExports[fn.name] = fn; });
+  asyncFunctions.forEach(fn => { childProcessExports[fn.name] = fn; });
 };
 
 const speed = (
-  // Function which manages the process of testing functions
+  // Function that manages the process of testing functions
   caption, // String, caption of test
   testFunctions, // Array, sync functions and array of async functions
-  config = {} // Object, config (count, maxAnomalyPercent, startCount)
+  config = {} // Object, config (count, anomalyPercent, startCount)
 ) => {
   const syncFunctions = []; // Array of synchronous functions
   const asyncFunctions = []; // Array of asynchronous functions, callback-last
   testFunctions.forEach(value => {
     if (typeof(value) === 'function') syncFunctions.push(value);
-    else value.forEach(func => asyncFunctions.push(func));
+    else value.forEach(fn => asyncFunctions.push(fn));
   });
 
   if (process.argv[1] === PATH_TO_GET_TIME) { // start only from child process
@@ -53,21 +53,23 @@ const speed = (
   }
 
   for (const option in defaultOptions) {
-    config[option] = config[option] || defaultOptions[option];
+    if (config[option] === undefined) config[option] = defaultOptions[option];
   }
 
   const results = []; // results of all functions
-  config.testFile = module.parent.filename;
   const requests = prepareRequests(syncFunctions, asyncFunctions);
+  config.testFile = module.parent.filename;
 
   const sendRequest = (
-    funcName, // String, name of test function
-    funcType // String, 'sync' or 'async'
+    fnName, // String, name of test function
+    fnType // String, 'sync' or 'async'
   ) => {
-    const forked = fork(PATH_TO_GET_TIME, { execArgv: ['--expose-gc'] });
-    forked.send(Object.assign(config, { funcName, funcType }));
+    const forked = fork(PATH_TO_GET_TIME, {
+      execArgv: ['--expose-gc', '--allow-natives-syntax']
+    });
+    forked.send(Object.assign(config, { fnName, fnType }));
     forked.on('message', result => {
-      results.push(result);
+      results.push(Object.assign(result, { fnName }));
       if (requests.length) sendRequest(...requests.pop());
       else makeResults(results, caption, config.count);
     });

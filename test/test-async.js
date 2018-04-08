@@ -14,7 +14,7 @@ mhpt.speed('Speed test', [[
   baseFunction,
   twiceAsLongFunction
 ]], {
-  count: 1000,
+  count: 10000,
   MAX_ANOMALY_PERCENT: 1,
   NODE_VERSIONS: ['9']
 });
