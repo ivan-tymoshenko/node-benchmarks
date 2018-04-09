@@ -3,11 +3,11 @@
 const mhpt = require('..');
 
 const baseFunction = callback => {
-  setTimeout(callback, 10);
+  setTimeout(callback, 100);
 };
 
 const twiceAsLongFunction = callback => {
-  setTimeout(callback, 20);
+  setTimeout(callback, 200);
 };
 
 mhpt.speed('Speed test', [[
@@ -15,6 +15,6 @@ mhpt.speed('Speed test', [[
   twiceAsLongFunction
 ]], {
   count: 10000,
-  MAX_ANOMALY_PERCENT: 1,
-  NODE_VERSIONS: ['9']
+  anomalyPercent: 1,
+  startCount: 0
 });

@@ -8,7 +8,7 @@ const PATH_TO_GET_TIME = path.join(__dirname, '/lib/get-time.js');
 
 const defaultOptions = {
   count: 25000, // number of test iterations
-  startCount: 1000, // number of first optimizing iterations
+  startCount: 0, // number of first optimizing iterations
   anomalyPercent: 5 // maximum possible percent of anomalies
 };
 
