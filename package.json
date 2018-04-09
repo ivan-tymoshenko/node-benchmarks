@@ -2,10 +2,11 @@
   "name": "mhpt",
   "version": "0.2.0",
   "author": "Timoshenko Ivan <kerckh@gmail.com>",
-  "description": "",
+  "description": "Performance testing library",
+  "readmeFilename": "README.md",
   "main": "./mhpt.js",
   "scripts": {
-    "test": "node ./test/*",
+    "test": "npm run lint && node ./test/test-sync.js && node ./test/test-async.js",
     "lint": "eslint ."
   },
   "repository": {
@@ -16,11 +17,10 @@
   "bugs": {
     "url": "https://github.com/bugagashenkj/mhpt/issues"
   },
-  "homepage": "https://github.com/bugagashenkj/mhpt#readme",
   "engines": {
     "node": ">=6.5.0"
   },
   "devDependencies": {
-    "eslint": "^4.16.0"
+    "eslint": "^4.19.1"
   }
 }
