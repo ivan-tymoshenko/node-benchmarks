@@ -6,7 +6,7 @@
   "readmeFilename": "README.md",
   "main": "./mhpt.js",
   "scripts": {
-    "test": "npm run lint && node ./test/test-sync.js && node ./test/test-async.js",
+    "test": "node ./test/test-sync.js && node ./test/test-async.js",
     "lint": "eslint ."
   },
   "repository": {

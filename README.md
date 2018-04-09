@@ -2,6 +2,7 @@
 
 [![TravisCI](https://travis-ci.org/bugagashenkj/mhpt.svg?branch=master)](https://travis-ci.org/bugagashenkj/mhpt)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/79d81f700ad441568d1dc6cca687ea77)](https://www.codacy.com/app/bugagashenkj/mhpt)
+[![bitHound](https://www.bithound.io/github/bugagashenkj/mhpt/badges/score.svg)](https://www.bithound.io/github/bugagashenkj/mhpt)
 
 `MHPT` is a library for testing the execution time of functions and comparing functions by speed.
 
@@ -17,12 +18,12 @@
 
 ## Speed test
 `mhpt.speed(caption, fns, [, options])`
-- `caption` <string> test caption
-- `fns` <array> array of test functions
-- `options` <Object> test options(optional)
-    - `count` <number> number of test iterations
-    - `startCount` <number> number of first optimizing iterations
-    - `anomalyPercent` <number> maximum possible percent of anomalies
+- `caption` - test caption
+- `fns` - array of test functions
+- `options` - test options(optional)
+  - `count` - number of test iterations
+  - `startCount` - number of first optimizing iterations
+  - `anomalyPercent` - maximum possible percent of anomalies
 
 Example:
 
