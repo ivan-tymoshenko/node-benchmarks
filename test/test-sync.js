@@ -1,6 +1,6 @@
 'use strict';
 
-const mhtp = require('..');
+const mhpt = require('..');
 
 function makeClosure(hello, size, flag) {
   return () => {
@@ -86,7 +86,7 @@ function itemFactory(hello, size, flag) {
   return { hello, size, flag };
 }
 
-mhtp.speed('Benchmark example', [
+mhpt.speed('Benchmark example', [
   closureInstance,
   defineObject,
   defineArray,

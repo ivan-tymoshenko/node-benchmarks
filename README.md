@@ -1,6 +1,7 @@
 # Performance testing library
 
 [![TravisCI](https://travis-ci.org/bugagashenkj/mhpt.svg?branch=master)](https://travis-ci.org/bugagashenkj/mhpt)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/79d81f700ad441568d1dc6cca687ea77)](https://www.codacy.com/app/bugagashenkj/mhpt)
 
 `MHPT` is a library for testing the execution time of functions and comparing functions by speed.
 
@@ -23,8 +24,10 @@
     - `startCount` <number> number of first optimizing iterations
     - `anomalyPercent` <number> maximum possible percent of anomalies
 
+Example:
+
 ```JavaScript
-mhtp.speed('Benchmark example',
+mhpt.speed('Benchmark example',
   [f1, f2, f3, [f4, f5]], {
     count: 250000,
     anomalyPercent: 5,
