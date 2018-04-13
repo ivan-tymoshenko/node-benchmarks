@@ -1,21 +1,21 @@
 {
-  "name": "mhpt",
+  "name": "metatest",
   "version": "0.2.0",
   "author": "Timoshenko Ivan <kerckh@gmail.com>",
   "description": "Performance testing library",
   "readmeFilename": "README.md",
-  "main": "./mhpt.js",
+  "main": "./metatest.js",
   "scripts": {
     "test": "node ./test/test-sync.js && node ./test/test-async.js",
     "lint": "eslint ."
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/bugagashenkj/mhpt"
+    "url": "https://github.com/bugagashenkj/metatest"
   },
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/bugagashenkj/mhpt/issues"
+    "url": "https://github.com/bugagashenkj/metatest/issues"
   },
   "engines": {
     "node": ">=6.5.0"

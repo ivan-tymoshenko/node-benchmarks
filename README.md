@@ -1,10 +1,10 @@
 # Performance testing library
 
-[![TravisCI](https://travis-ci.org/bugagashenkj/mhpt.svg?branch=master)](https://travis-ci.org/bugagashenkj/mhpt)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/79d81f700ad441568d1dc6cca687ea77)](https://www.codacy.com/app/bugagashenkj/mhpt)
-[![bitHound](https://www.bithound.io/github/bugagashenkj/mhpt/badges/score.svg)](https://www.bithound.io/github/bugagashenkj/mhpt)
+[![TravisCI](https://travis-ci.org/bugagashenkj/metatest.svg?branch=master)](https://travis-ci.org/bugagashenkj/metatest)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/79d81f700ad441568d1dc6cca687ea77)](https://www.codacy.com/app/bugagashenkj/metatest)
+[![bitHound](https://www.bithound.io/github/bugagashenkj/metatest/badges/score.svg)](https://www.bithound.io/github/bugagashenkj/metatest)
 
-`MHPT` is a library for testing the execution time of functions and comparing functions by speed.
+`METATEST` is a library for testing the execution time of functions and comparing functions by speed.
 
 ## Features
 
@@ -17,7 +17,7 @@
   - Gets optimization status of test function
 
 ## Speed test
-`mhpt.speed(caption, fns, [, options])`
+`metatest.speed(caption, fns, [, options])`
 - `caption` - test caption
 - `fns` - array of test functions
 - `options` - test options(optional)
@@ -28,7 +28,7 @@
 Example:
 
 ```JavaScript
-mhpt.speed('Benchmark example',
+metatest.speed('Benchmark example',
   [f1, f2, f3, [f4, f5]], {
     count: 250000,
     anomalyPercent: 5,
@@ -40,4 +40,4 @@ mhpt.speed('Benchmark example',
 - Asynchronous test functions(callback-last / err-first function): `f4, f5`
 
 ## Contributors
-  - See github for full [contributors list](https://github.com/bugagashenkj/mhpt/graphs/contributors)
+  - See github for full [contributors list](https://github.com/bugagashenkj/metatest/graphs/contributors)

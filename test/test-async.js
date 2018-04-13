@@ -1,6 +1,6 @@
 'use strict';
 
-const mhpt = require('..');
+const metatest = require('..');
 
 const baseFunction = callback => {
   setTimeout(callback, 10);
@@ -10,7 +10,7 @@ const twiceAsLongFunction = callback => {
   setTimeout(callback, 20);
 };
 
-mhpt.speed('Speed test', [[
+metatest.speed('Speed test', [[
   baseFunction,
   twiceAsLongFunction
 ]], {

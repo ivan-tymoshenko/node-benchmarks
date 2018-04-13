@@ -1,6 +1,6 @@
 'use strict';
 
-const mhpt = require('..');
+const metatest = require('..');
 
 function makeClosure(hello, size, flag) {
   return () => {
@@ -86,7 +86,7 @@ function itemFactory(hello, size, flag) {
   return { hello, size, flag };
 }
 
-mhpt.speed('Benchmark example', [
+metatest.speed('Benchmark example', [
   closureInstance,
   defineObject,
   defineArray,
