@@ -76,4 +76,5 @@ const speed = (
   };
   sendRequest(...requests.pop());
 };
+
 module.exports = { speed };
