@@ -2,7 +2,6 @@
 
 [![TravisCI](https://travis-ci.org/bugagashenkj/metatest.svg?branch=master)](https://travis-ci.org/bugagashenkj/metatest)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/79d81f700ad441568d1dc6cca687ea77)](https://www.codacy.com/app/bugagashenkj/metatest)
-[![bitHound](https://www.bithound.io/github/bugagashenkj/metatest/badges/score.svg)](https://www.bithound.io/github/bugagashenkj/metatest)
 
 `METATEST` is a library for testing the execution time of functions and comparing functions by speed.
 
