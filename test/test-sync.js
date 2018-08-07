@@ -1,6 +1,6 @@
 'use strict';
 
-const metatest = require('..');
+const { speed } = require('../bugaga-tests');
 
 function makeClosure(hello, size, flag) {
   return () => {
@@ -86,7 +86,7 @@ function itemFactory(hello, size, flag) {
   return { hello, size, flag };
 }
 
-metatest.speed('Benchmark example', [
+speed('Benchmark example', [
   closureInstance,
   defineObject,
   defineArray,

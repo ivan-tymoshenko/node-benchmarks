@@ -1,5 +1,5 @@
 {
-  "name": "metatest",
+  "name": "bugaga-tests",
   "version": "0.2.0",
   "author": "Timoshenko Ivan <bugagashenkj@gmail.com>",
   "description": "Performance testing library",
@@ -7,7 +7,7 @@
   "main": "./metatest.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/bugagashenkj/metatest"
+    "url": "https://github.com/bugagashenkj/bugaga-tests"
   },
   "scripts": {
     "test": "node ./test/test-sync.js && node ./test/test-async.js",
@@ -15,7 +15,7 @@
   },
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/bugagashenkj/metatest/issues"
+    "url": "https://github.com/bugagashenkj/bugaga-tests/issues"
   },
   "engines": {
     "node": ">=8.11.3"

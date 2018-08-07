@@ -1,9 +1,9 @@
 # Performance testing library
 
-[![TravisCI](https://travis-ci.org/bugagashenkj/metatest.svg?branch=master)](https://travis-ci.org/bugagashenkj/metatest)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/79d81f700ad441568d1dc6cca687ea77)](https://www.codacy.com/app/bugagashenkj/metatest)
+[![TravisCI](https://travis-ci.org/bugagashenkj/bugaga-tests.svg?branch=master)](https://travis-ci.org/bugagashenkj/bugaga-tests)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/79d81f700ad441568d1dc6cca687ea77)](https://www.codacy.com/app/bugagashenkj/bugaga-tests)
 
-`METATEST` is a library for testing the execution time of functions and comparing functions by speed.
+`BUGAGA_TESTS` is a library for testing the execution time of functions and comparing functions by speed.
 
 ## Features
 
@@ -16,7 +16,7 @@
   - Gets optimization status of test function
 
 ## Speed test
-`metatest.speed(caption, fns, [, options])`
+`speed(caption, fns, [, options])`
 - `caption` - test caption
 - `fns` - array of test functions
 - `options` - test options(optional)
@@ -27,7 +27,7 @@
 Example:
 
 ```JavaScript
-metatest.speed('Benchmark example',
+speed('Benchmark example',
   [f1, f2, f3, [f4, f5]], {
     count: 250000,
     anomalyPercent: 5,
@@ -39,4 +39,4 @@ metatest.speed('Benchmark example',
 - Asynchronous test functions(callback-last / err-first function): `f4, f5`
 
 ## Contributors
-  - See github for full [contributors list](https://github.com/bugagashenkj/metatest/graphs/contributors)
+  - See github for full [contributors list](https://github.com/bugagashenkj/bugaga-tests/graphs/contributors)

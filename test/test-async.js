@@ -1,6 +1,6 @@
 'use strict';
 
-const metatest = require('..');
+const { speed } = require('../bugaga-tests');
 
 const baseFunction = callback => {
   setTimeout(callback, 10);
@@ -10,7 +10,7 @@ const twiceAsLongFunction = callback => {
   setTimeout(callback, 20);
 };
 
-metatest.speed('Speed test', [[
+speed('Speed test', [[
   baseFunction,
   twiceAsLongFunction
 ]], {
