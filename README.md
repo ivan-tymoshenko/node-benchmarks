@@ -1,9 +1,9 @@
-# Performance testing library
+# Performance testing library for NodeJs
 
 [![TravisCI](https://travis-ci.org/bugagashenkj/bugaga-tests.svg?branch=master)](https://travis-ci.org/bugagashenkj/bugaga-tests)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/79d81f700ad441568d1dc6cca687ea77)](https://www.codacy.com/app/bugagashenkj/bugaga-tests)
 
-`BUGAGA_TESTS` is a library for testing the execution time of functions and comparing functions by speed.
+`node-benchmarks` is a library for testing the execution time of functions and comparing functions by speed.
 
 ## Features
 
