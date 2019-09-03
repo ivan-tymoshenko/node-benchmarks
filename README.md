@@ -1,7 +1,7 @@
-# Performance testing library for NodeJs
+# Benchmark library for NodeJs
 
-[![TravisCI](https://travis-ci.org/bugagashenkj/bugaga-tests.svg?branch=master)](https://travis-ci.org/bugagashenkj/bugaga-tests)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/79d81f700ad441568d1dc6cca687ea77)](https://www.codacy.com/app/bugagashenkj/bugaga-tests)
+[![TravisCI](https://travis-ci.org/bugagashenkj/node-benchmarks.svg?branch=master)](https://travis-ci.org/bugagashenkj/node-benchmarks)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/79d81f700ad441568d1dc6cca687ea77)](https://www.codacy.com/app/bugagashenkj/node-benchmarks)
 
 `node-benchmarks` is a library for testing the execution time of functions and comparing functions by speed.
 
@@ -39,4 +39,4 @@ speed('Benchmark example',
 - Asynchronous test functions(callback-last / err-first function): `f4, f5`
 
 ## Contributors
-  - See github for full [contributors list](https://github.com/bugagashenkj/bugaga-tests/graphs/contributors)
+  - See github for full [contributors list](https://github.com/bugagashenkj/node-benchmarks/graphs/contributors)
