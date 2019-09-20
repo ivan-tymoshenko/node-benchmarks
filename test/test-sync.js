@@ -28,7 +28,7 @@ function defineObject() {
   return {
     hello: 'world',
     size: 100500,
-    flag: true
+    flag: true,
   };
 }
 
@@ -86,20 +86,24 @@ function itemFactory(hello, size, flag) {
   return { hello, size, flag };
 }
 
-speed('Benchmark example', [
-  closureInstance,
-  defineObject,
-  defineArray,
-  defineArrayOfString,
-  defineArrayOfNumber,
-  mixinObject,
-  newPrototype,
-  newClass,
-  newObject,
-  objectCreate,
-  callFactory
-], {
-  count: 250000,
-  anomalyPercent: 5,
-  startCount: 0
-});
+speed(
+  'Benchmark example',
+  [
+    closureInstance,
+    defineObject,
+    defineArray,
+    defineArrayOfString,
+    defineArrayOfNumber,
+    mixinObject,
+    newPrototype,
+    newClass,
+    newObject,
+    objectCreate,
+    callFactory,
+  ],
+  {
+    count: 250000,
+    anomalyPercent: 5,
+    startCount: 0,
+  }
+);

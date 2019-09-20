@@ -10,11 +10,8 @@ const twiceAsLongFunction = callback => {
   setTimeout(callback, 20);
 };
 
-speed('Speed test', [[
-  baseFunction,
-  twiceAsLongFunction
-]], {
+speed('Speed test', [[baseFunction, twiceAsLongFunction]], {
   count: 1000,
   anomalyPercent: 1,
-  startCount: 0
+  startCount: 0,
 });

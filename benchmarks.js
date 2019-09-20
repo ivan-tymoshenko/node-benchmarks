@@ -9,7 +9,7 @@ const PATH_TO_GET_TIME = path.join(__dirname, '/lib/get-time.js');
 const defaultOptions = {
   count: 25000, // number of test iterations
   startCount: 0, // number of first optimizing iterations
-  anomalyPercent: 5 // maximum possible percent of anomalies
+  anomalyPercent: 5, // maximum possible percent of anomalies
 };
 
 const prepareRequests = (
@@ -30,8 +30,12 @@ const exportsFunctions = (
   asyncFunctions // Array of asynchronous functions, callback-last
 ) => {
   const childProcessExports = module.parent.exports;
-  syncFunctions.forEach(fn => { childProcessExports[fn.name] = fn; });
-  asyncFunctions.forEach(fn => { childProcessExports[fn.name] = fn; });
+  syncFunctions.forEach(fn => {
+    childProcessExports[fn.name] = fn;
+  });
+  asyncFunctions.forEach(fn => {
+    childProcessExports[fn.name] = fn;
+  });
 };
 
 const speed = (
@@ -43,11 +47,12 @@ const speed = (
   const syncFunctions = []; // Array of synchronous functions
   const asyncFunctions = []; // Array of asynchronous functions, callback-last
   testFunctions.forEach(value => {
-    if (typeof(value) === 'function') syncFunctions.push(value);
+    if (typeof value === 'function') syncFunctions.push(value);
     else value.forEach(fn => asyncFunctions.push(fn));
   });
 
-  if (process.argv[1] === PATH_TO_GET_TIME) { // start only from child process
+  if (process.argv[1] === PATH_TO_GET_TIME) {
+    // start only from child process
     exportsFunctions(syncFunctions, asyncFunctions);
     return;
   }
@@ -65,7 +70,7 @@ const speed = (
     fnType // String, 'sync' or 'async'
   ) => {
     const forked = fork(PATH_TO_GET_TIME, {
-      execArgv: ['--expose-gc', '--allow-natives-syntax']
+      execArgv: ['--expose-gc', '--allow-natives-syntax'],
     });
     forked.send(Object.assign(config, { fnName, fnType }));
     forked.on('message', result => {
