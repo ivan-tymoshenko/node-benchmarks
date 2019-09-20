@@ -1,6 +1,6 @@
 'use strict';
 
-const { speed } = require('../bugaga-tests');
+const { speed } = require('../benchmarks');
 
 function makeClosure(hello, size, flag) {
   return () => {

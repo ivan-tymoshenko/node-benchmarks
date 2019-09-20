@@ -1,21 +1,21 @@
 {
-  "name": "bugaga-tests",
+  "name": "node-benchmarks",
   "version": "0.2.0",
   "author": "Timoshenko Ivan <bugagashenkj@gmail.com>",
-  "description": "Performance testing library",
+  "description": "Benchmark library for NodeJs",
   "readmeFilename": "README.md",
-  "main": "./metatest.js",
+  "main": "benchmarks.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/bugagashenkj/bugaga-tests"
+    "url": "https://github.com/bugagashenkj/node-benchmarks"
   },
   "scripts": {
-    "test": "node ./test/test-sync.js && node ./test/test-async.js",
+    "test": "node ./test/*",
     "lint": "eslint ."
   },
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/bugagashenkj/bugaga-tests/issues"
+    "url": "https://github.com/bugagashenkj/node-benchmarks/issues"
   },
   "engines": {
     "node": ">=8.11.3"
